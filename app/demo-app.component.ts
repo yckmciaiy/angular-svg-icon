@@ -6,15 +6,9 @@ import {SvgIconComponent} from './svg-icon.component';
 	directives: [ SvgIconComponent ],
 	template: `
 		<div style="width:100px;">
-			<div style="fill:red;">
-				<svg-icon src="images/eye.svg"></svg-icon>
-			</div>
-			<div style="fill:green;">
-				<svg-icon src="images/eye.svg"></svg-icon>
-			</div>
-			<div style="fill:blue;">
-				<svg-icon src="images/eye.svg"></svg-icon>
-			</div>
+			<svg-icon src="images/eye.svg" style="fill:red;"></svg-icon>
+			<svg-icon src="images/eye.svg" style="fill:green;"></svg-icon>
+			<svg-icon src="images/eye.svg" style="fill:blue;"></svg-icon>
 		</div>
 	`
 })
