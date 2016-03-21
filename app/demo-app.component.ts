@@ -1,4 +1,6 @@
 import {Component} from 'angular2/core';
+import {NgStyle} from 'angular2/common';
+
 import {SvgIconComponent} from './svg-icon.component';
 
 @Component({
@@ -27,7 +29,7 @@ import {SvgIconComponent} from './svg-icon.component';
 				</fieldset>
 				<label>width:</label> <input type="number" min="0" max="1000" [(ngModel)]="w"><label> px</label>
 			</form>
-			<div [style]="getStyle()">
+				<div [ngStyle]="{'width': w + 'px', 'fill': 'rgb(' + r + ',' + g + ',' + b + ')' }" >
 				<svg-icon src="images/eye.svg"></svg-icon>
 			</div>
 			<tt>&lt;div style="{{getStyle()}}"&gt;<br/>
