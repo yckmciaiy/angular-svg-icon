@@ -15,18 +15,18 @@ work-around method.
 A [working demo](http://czeckd.github.io/angular2-svg-icon/demo/) shows the 
 component in action. The demo shows an SVG image styled with CSS fill to be 
 red, green, and blue. It provides a form where width and fill color can be 
-adjusted and displaying the associated HTML and CSS.
+adjusted and displays the corresponding HTML and CSS.
 
 ## Usage
 
 Copy `svg-icon.component.ts` into your app. Import the SvgIconComponent into a 
 component and include it in that component's directives. For a usage example, 
-see `demo-app.component.ts`. 
+see `app/demo-app.component.ts`. 
 
 Additionally, set-up `HTTP_PROVIDERS` in your app's bootstrap method and 
 import `rxjs/add/operator/map` to use the map. See `main.ts` for an example. 
 Note that `http.dev.js` from angular2 will also need to be added to the html 
-page where the angular2 scripts are is loaded.
+page where the angular2 scripts are loaded.
 
 
 ### Getting started
