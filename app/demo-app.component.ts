@@ -5,7 +5,7 @@ import {SvgIconComponent} from './svg-icon.component';
 
 @Component({
 	selector: 'demo-app',
-	directives: [ SvgIconComponent ],
+	directives: [ NgStyle, SvgIconComponent ],
 	template: `
 		<div style="margin:15px;">
 			<div style="width:500px;">
@@ -36,12 +36,10 @@ import {SvgIconComponent} from './svg-icon.component';
 				&nbsp;&nbsp;&nbsp;&lt;svg-icon src="images/eye.svg"&gt;&lt;/svg-icon&gt;<br/>
 				&lt;/div&gt;
 			</tt>
-		</div>
-		
-	`
+		</div>`
 })
 
-export class DemoAppComponent { 
+export class DemoAppComponent {
 	private r:number = 120;
 	private g:number = 120;
 	private b:number = 120;
