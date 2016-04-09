@@ -24,8 +24,8 @@ export class SvgIconComponent implements OnInit {
 		this.http.get( this.src )
 			.map( (res: Response) => res.text() )
 			.subscribe(
-				data => { this.iconData = data },
-				err => { console.error(err) }
+				data => { this.iconData = data; },
+				err => { console.error(err); }
 			);
 	}
 
