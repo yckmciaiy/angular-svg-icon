@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from 'angular2/core';
-import {Http, Response} from 'angular2/http';
+import { Component, Input, OnInit } from '@angular/core';
+import { Http, Response } from '@angular/http';
 
 
 @Component({
