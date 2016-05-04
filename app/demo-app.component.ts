@@ -1,11 +1,12 @@
-import {Component} from 'angular2/core';
-import {NgStyle} from 'angular2/common';
+import { Component } from '@angular/core';
+import { NgStyle } from '@angular/common';
 
-import {SvgIconComponent} from './svg-icon.component';
+import { SvgIconComponent } from './svg-icon.component';
 
 @Component({
 	selector: 'demo-app',
 	directives: [ NgStyle, SvgIconComponent ],
+	styles : [ 'fieldset input { margin-right: 10px; }' ],
 	template: `
 		<div style="margin:15px;">
 			<div style="width:500px;">
@@ -49,4 +50,3 @@ export class DemoAppComponent {
 		return 'width:' + this.w + 'px;fill:rgb(' + this.r + ',' + this.g + ',' + this.b + ');';
 	}
 }
-

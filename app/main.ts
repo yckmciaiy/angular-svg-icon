@@ -1,7 +1,7 @@
-import {bootstrap} from 'angular2/platform/browser';
-import {HTTP_PROVIDERS} from 'angular2/http';
+import { bootstrap } from '@angular/platform-browser-dynamic';
+import { HTTP_PROVIDERS } from '@angular/http';
 import 'rxjs/add/operator/map';
 
-import {DemoAppComponent} from './demo-app.component';
+import { DemoAppComponent } from './demo-app.component';
 
 bootstrap(DemoAppComponent, [ HTTP_PROVIDERS ]);
