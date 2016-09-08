@@ -1,5 +1,11 @@
 # angular2-svg-icon
 
+*Please note*: this component is deprecated in favor of the [icon 
+component](https://www.npmjs.com/package/@angular2-material/icon) from 
+[angular/material2](https://github.com/angular/material2).
+
+## Background
+
 The svg-icon is an Angular 2 component that allows for the continuation of the 
 AngularJS method for easily inlining SVGs explained by [Ben 
 Markowitz](https://www.mobomo.com/2014/09/angular-js-svg/) and others. 
