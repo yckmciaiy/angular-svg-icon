@@ -1,10 +1,10 @@
 {
-	"name": "angular2-svg-icon",
+	"name": "angular-svg-icon",
 	"description": "Angular 2 component for inlining SVGs allowing them to be easily styled with CSS.",
 	"version": "1.0.0",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/czeckd/angular2-svg-icon.git"
+		"url": "https://github.com/czeckd/angular-svg-icon.git"
 	},
 	"author": "David Czeck",
 	"license": "MIT",
