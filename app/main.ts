@@ -1,7 +1,5 @@
-import { bootstrap } from '@angular/platform-browser-dynamic';
-import { HTTP_PROVIDERS } from '@angular/http';
-import 'rxjs/add/operator/map';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-import { DemoAppComponent } from './demo-app.component';
+import { AppModule } from './app.module';
 
-bootstrap(DemoAppComponent, [ HTTP_PROVIDERS ]);
+platformBrowserDynamic().bootstrapModule( AppModule );
