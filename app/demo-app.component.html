@@ -1,0 +1,29 @@
+<div style="margin:15px;">
+	<div style="width:500px;">
+		<div style="width:90px;float:left;">
+			<svg-icon src="images/eye.svg" style="fill:red;"></svg-icon>
+		</div>
+		<div style="width:90px;float:left;margin-left:20px;">
+			<svg-icon src="images/eye.svg" style="fill:green;"></svg-icon>
+		</div>
+		<div style="width:90px;float:left;margin-left:20px;">
+			<svg-icon src="images/eye.svg" style="fill:blue;"></svg-icon>
+		</div>
+	</div>
+
+	<form style="clear:both;">
+		<h2>Set the style</h2>
+		<fieldset style="border:none;">
+			<label>red:</label> <input type="number" min="0" max="255" [(ngModel)]="r" name="red">
+			<label>green:</label> <input type="number" min="0" max="255" [(ngModel)]="g" name="green">
+			<label>blue:</label> <input type="number" min="0" max="255" [(ngModel)]="b" name="blue">
+		</fieldset>
+		<label>width:</label> <input type="number" min="0" max="1000" [(ngModel)]="w" name="width"><label> px</label>
+	</form>
+	<div [ngStyle]="{'width': w + 'px', 'fill': 'rgb(' + r + ',' + g + ',' + b + ')' }" >
+		<svg-icon src="images/eye.svg"></svg-icon>
+	</div>
+<small><pre>&lt;div style="{{getStyle()}}"&gt;
+&nbsp;&nbsp;&nbsp;&lt;svg-icon src="images/eye.svg"&gt;&lt;/svg-icon&gt;
+&lt;/div&gt;</pre></small>
+</div>
