@@ -1,36 +1,42 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { Component, ElementRef, Input, OnInit, Renderer } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 
 @Component({
 	selector: 'svg-icon',
-	template: `<div [innerHTML]="iconData"></div>`
+	styles: [ ':host { display:inline-block; }' ],
+	template: '<ng-content></ng-content>'
 })
-
 
 export class SvgIconComponent implements OnInit {
 	@Input() src:string;
 
-	private iconData:any;
-
-	constructor(private http:Http, private sanitizer:DomSanitizer) {
+	constructor(private element:ElementRef, private renderer:Renderer, private http:Http) {
 	}
 
 	ngOnInit() {
 		this.loadSvg();
 	}
 
-	loadSvg() {
+	private loadSvg() {
 		this.http.get( this.src )
 			.map( (res: Response) => res.text() )
 			.subscribe(
 				data => {
-					this.iconData = this.sanitizer.bypassSecurityTrustHtml(data);
+					const div = document.createElement('DIV');
+					div.innerHTML = data;
+					const svg = <SVGElement>div.querySelector('svg');
+					this.setSvg(svg);
 				},
 				err => { console.error(err); }
 			);
+	}
+
+	private setSvg(svg:SVGElement) {
+		const elem = this.element.nativeElement;
+		elem.innerHTML = '';
+		this.renderer.projectNodes(elem, [svg]);
 	}
 
 }
