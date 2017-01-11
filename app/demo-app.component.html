@@ -1,14 +1,8 @@
 <div style="margin:15px;">
 	<div style="width:500px;">
-		<div style="width:90px;float:left;">
-			<svg-icon src="images/eye.svg" style="fill:red;"></svg-icon>
-		</div>
-		<div style="width:90px;float:left;margin-left:20px;">
-			<svg-icon src="images/eye.svg" style="fill:green;"></svg-icon>
-		</div>
-		<div style="width:90px;float:left;margin-left:20px;">
-			<svg-icon src="images/eye.svg" style="fill:blue;"></svg-icon>
-		</div>
+		<svg-icon src="images/eye.svg" style="fill:red;width:90px;float:left;"></svg-icon>
+		<svg-icon src="images/eye.svg" style="fill:green;width:90px;float:left;margin-left:20px;"></svg-icon>
+		<svg-icon src="images/eye.svg" style="fill:blue;width:90px;float:left;margin-left:20px;"></svg-icon>
 	</div>
 
 	<form style="clear:both;">
@@ -20,10 +14,9 @@
 		</fieldset>
 		<label>width:</label> <input type="number" min="0" max="1000" [(ngModel)]="w" name="width"><label> px</label>
 	</form>
-	<div [ngStyle]="{'width': w + 'px', 'fill': 'rgb(' + r + ',' + g + ',' + b + ')' }" >
-		<svg-icon src="images/eye.svg"></svg-icon>
-	</div>
-<small><pre>&lt;div style="{{getStyle()}}"&gt;
-&nbsp;&nbsp;&nbsp;&lt;svg-icon src="images/eye.svg"&gt;&lt;/svg-icon&gt;
-&lt;/div&gt;</pre></small>
+
+	<svg-icon src="images/eye.svg" [ngStyle]="{'width': w + 'px', 'fill': 'rgb(' + r + ',' + g + ',' + b + ')' }"></svg-icon>
+
+<small><pre>&lt;svg-icon src="images/eye.svg" 
+  style="{{getStyle()}}"&gt;&lt;/svg-icon&gt;</pre></small>
 </div>

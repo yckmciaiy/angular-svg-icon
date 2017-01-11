@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 
-import { SvgIconComponent } from './svg-icon.component';
-
 @Component({
 	selector: 'demo-app',
 	styles : [ 'fieldset input { margin-right: 10px; }' ],
