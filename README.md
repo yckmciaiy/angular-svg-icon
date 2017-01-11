@@ -18,7 +18,7 @@ work-around method.
 
 ## Demo
 
-A [working demo](http://czeckd.github.io/angular2-svg-icon/demo/) shows the 
+A [working demo](http://czeckd.github.io/angular-svg-icon/demo/) shows the 
 component in action. The demo shows an SVG image styled with CSS fill to be 
 red, green, and blue. It provides a form where width and fill color can be 
 adjusted and displays the corresponding HTML and CSS.

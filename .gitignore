@@ -1,5 +1,4 @@
-app/**/*.js
-app/**/*.map
 node_modules
-typings
+app/**/*.js
+*.js.map
 **~
