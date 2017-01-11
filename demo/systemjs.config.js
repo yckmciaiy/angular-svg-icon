@@ -1,53 +1,46 @@
-(function(global) {
+(function (global) {
 
-  var ngVer = '@2.0.0-rc.1';
+	var ngVer = '@2.4.2';
 
-  // map tells the System loader where to look for things
-  var map = {
-    'app':  'app', // 'dist',
-    'rxjs': 'https://unpkg.com/rxjs@5.0.0-beta.6'
-  };
+	var paths = {
+		'npm:' : 'https://unpkg.com/'
+	}
 
-  // packages tells the System loader how to load when no filename and/or no extension
-  var packages = {
-    'app':  { main: 'main.ts',  defaultExtension: 'ts' },
-    'rxjs': { defaultExtension: 'js' }
-  };
+	var map = {
+		'app'        : 'app',
+		'rxjs'       : 'npm:rxjs@5.0.1',
+		'typescript' : 'npm:typescript@2.1.4/lib/typescript.js'
+	};
 
-  var packageNames = [
-    '@angular/common',
-    '@angular/compiler',
-    '@angular/core',
-    '@angular/http',
-    '@angular/platform-browser',
-    '@angular/platform-browser-dynamic'
-  ];
+	var pkgs = [
+		'common', 'compiler', 'core', 'forms', 'http', 'platform-browser', 'platform-browser-dynamic'
+	];
 
-  // add map entries for angular packages in the form '@angular/common': 'https://unpkg.com/@angular/common@0.0.0-3?main=browser'
-  packageNames.forEach(function(pkgName) {
-	map[pkgName] = 'https://unpkg.com/' + pkgName + ngVer;
-  });
+	pkgs.forEach(function(name) {
+		var key = '@angular/' + name;
+		var value = 'npm:@angular/' + name + ngVer + '/bundles/' + name + '.umd.js';
+		map[key] = value;
+	});
 
-  // add package entries for angular packages in the form '@angular/common': { main: 'index.js', defaultExtension: 'js' }
-  packageNames.forEach(function(pkgName) {
-    packages[pkgName] = { main: 'index.js', defaultExtension: 'js' };
-  });
+	System.config({
 
+		transpiler: 'typescript',
+    	typescriptOptions: {
+			"emitDecoratorMetadata": true
+		},
 
-  var config = {
-	transpiler: 'typescript',
-    typescriptOptions: {
-      emitDecoratorMetadata: true
-    },
-    map: map,
-    packages: packages
-  }
+	    paths: paths,
+		map: map,
 
-  // filterSystemConfig - index.html's chance to modify config before it is registered.
-  if (global.filterSystemConfig) { 
-    global.filterSystemConfig(config); 
-  }
-
-  System.config(config);
-
+		packages: {
+			app: {
+        		main: './main.ts',
+				defaultExtension: 'ts'
+			},
+			rxjs: {
+				defaultExtension: 'js'
+			}
+		}
+	});
 })(this);
+
