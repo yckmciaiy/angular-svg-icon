@@ -1,8 +1,20 @@
-# angular2-svg-icon
+# angular-svg-icon
 
-*Please note*: this component is deprecated in favor of the [icon 
-component](https://www.npmjs.com/package/@angular2-material/icon) from 
-[angular/material2](https://github.com/angular/material2).
+## Demo
+
+The [working demo](http://czeckd.github.io/angular-svg-icon/demo/) shows the 
+component and registry service in action. The demo provides a form where width 
+and fill color can be adjusted and displays the corresponding HTML and CSS.
+
+## svg-icon
+
+The `svg-icon` is comprised of two parts: an icon registery and a component. The
+icon registry is responsible for loading and caching a svg, which is indexed by
+its url.
+
+The component is responsible for displaying the svg. After getting the svg from
+the registry it clones the `SVGElement` and the svg to the component's inner 
+HTML.
 
 ## Background
 
@@ -16,24 +28,29 @@ The technique made use of ng-include to inline the svg source into the
 document. Angular 2, however, drops the support of ng-include, so this is my 
 work-around method.
 
-## Demo
-
-A [working demo](http://czeckd.github.io/angular-svg-icon/demo/) shows the 
-component in action. The demo shows an SVG image styled with CSS fill to be 
-red, green, and blue. It provides a form where width and fill color can be 
-adjusted and displays the corresponding HTML and CSS.
+The [icon component](https://www.npmjs.com/package/@angular2-material/icon) from 
+[angular/material2](https://github.com/angular/material2) used to have a direct
+means to load svg using the `<md-icon svgSrc="">` component attribute. This was
+removed due to security concerns. Those concerns still relevant for this component.
 
 ## Usage
 
-Copy `svg-icon.component.ts` into your app. Import the SvgIconComponent into a 
-component and include it in that component's directives. For a usage example, 
-see `app/demo-app.component.ts`. 
+Import `HttpModule`, `SvgIconComponent`, and `SvgIconRegistryService` into your
+app's main module. Example:
 
-Additionally, set-up `HTTP_PROVIDERS` in your app's bootstrap method and 
-import `rxjs/add/operator/map` to use the map. See `main.ts` for an example. 
-Note that `http.dev.js` from angular2 will also need to be added to the html 
-page where the angular2 scripts are loaded.
+```
+import { HttpModule } from '@angular/http';
 
+import { SvgIconComponent } from './svg-icon.component';
+import { SvgIconRegistryService } from './svg-icon-registry.service';
+
+
+@NgModule({
+    imports:         [ HttpModule ],
+    declarations:    [ SvgIconComponent ],
+    providers:       [ SvgIconRegistryService ]
+})
+```
 
 ### Getting started
 
