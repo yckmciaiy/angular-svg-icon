@@ -1,6 +1,6 @@
 import { Component, ElementRef, Input, OnInit, Renderer } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import 'rxjs/add/operator/map';
+
+import { SvgIconRegistryService } from './svg-icon-registry.service';
 
 
 @Component({
@@ -12,7 +12,8 @@ import 'rxjs/add/operator/map';
 export class SvgIconComponent implements OnInit {
 	@Input() src:string;
 
-	constructor(private element:ElementRef, private renderer:Renderer, private http:Http) {
+	constructor(private element:ElementRef, private renderer:Renderer,
+		private iconReg:SvgIconRegistryService) {
 	}
 
 	ngOnInit() {
@@ -20,23 +21,16 @@ export class SvgIconComponent implements OnInit {
 	}
 
 	private loadSvg() {
-		this.http.get( this.src )
-			.map( (res: Response) => res.text() )
-			.subscribe(
-				data => {
-					const div = document.createElement('DIV');
-					div.innerHTML = data;
-					const svg = <SVGElement>div.querySelector('svg');
-					this.setSvg(svg);
-				},
-				err => { console.error(err); }
-			);
+		this.iconReg.loadSvg(this.src).subscribe(svg => {
+			this.setSvg(svg);
+		});
 	}
 
 	private setSvg(svg:SVGElement) {
-		const elem = this.element.nativeElement;
+		const icon = <SVGElement>svg.cloneNode(true);
+		let elem = this.element.nativeElement;
 		elem.innerHTML = '';
-		this.renderer.projectNodes(elem, [svg]);
+		this.renderer.projectNodes(elem, [icon]);
 	}
-
 }
+
