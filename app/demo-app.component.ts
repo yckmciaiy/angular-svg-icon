@@ -7,10 +7,10 @@ import { Component } from '@angular/core';
 })
 
 export class DemoAppComponent {
-	private r:number = 120;
-	private g:number = 120;
-	private b:number = 120;
-	private w:number = 75;
+	private r = 120;
+	private g = 120;
+	private b = 120;
+	private w = 75;
 
 	getStyle(): string {
 		return 'width:' + this.w + 'px;fill:rgb(' + this.r + ',' + this.g + ',' + this.b + ');';

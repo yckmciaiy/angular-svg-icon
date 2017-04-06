@@ -1,6 +1,6 @@
 (function (global) {
 
-	var ngVer = '@2.4.2';
+  var ngVer = '@4.0.0';
 
 	var paths = {
 		'npm:' : 'https://unpkg.com/'
@@ -8,7 +8,7 @@
 
 	var map = {
 		'app'        : 'app',
-		'rxjs'       : 'npm:rxjs@5.0.1',
+		'rxjs'       : 'npm:rxjs@5.2.0',
 		'typescript' : 'npm:typescript@2.1.4/lib/typescript.js'
 	};
 
