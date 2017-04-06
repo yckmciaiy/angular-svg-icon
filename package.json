@@ -1,7 +1,7 @@
 {
   "name": "angular-svg-icon",
-  "description": "Angular 2 component for inlining SVGs allowing them to be easily styled with CSS.",
-  "version": "3.0.0",
+  "description": "Angular 2+ component for inlining SVGs allowing them to be easily styled with CSS.",
+  "version": "4.0.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/czeckd/angular-svg-icon.git"
@@ -16,23 +16,25 @@
     "lint": "tslint -c tslint.json ./app/**/*.ts -t verbose || true"
   },
   "dependencies": {
-    "@angular/common":  "~2.4.0",
-    "@angular/compiler":  "~2.4.0",
-    "@angular/core":  "~2.4.0",
-    "@angular/forms": "~2.4.0",
-    "@angular/http":  "~2.4.0",
-    "@angular/platform-browser":  "~2.4.0",
-    "@angular/platform-browser-dynamic":  "~2.4.0",
-    "systemjs": "0.19.40",
+    "@angular/common": "~4.0.0",
+    "@angular/compiler": "~4.0.0",
+    "@angular/core": "~4.0.0",
+    "@angular/forms": "~4.0.0",
+    "@angular/http":  "~4.0.0",
+    "@angular/platform-browser": "~4.0.0",
+    "@angular/platform-browser-dynamic": "~4.0.0",
     "core-js": "^2.4.1",
-    "rxjs": "5.0.1",
-    "zone.js": "^0.7.4"
+    "systemjs": "0.19.47",
+    "rxjs": "^5.2.0",
+    "zone.js": "^0.8.4"
   },
   "devDependencies": {
-    "concurrently": "^2.0.0",
+    "@angular/compiler-cli": "^4.0.0",
+    "@types/core-js": "^0.9.39",
+    "@types/node": "^6.0.60",
+    "concurrently": "^2.2.0",
     "lite-server": "^2.2.2",
-    "typescript": "^2.1.4",
-    "tslint":"^3.15.1",
-    "@types/node": "^6.0.46"
+    "tslint": "~4.5.0",
+    "typescript": "~2.2.0"
   }
 }
