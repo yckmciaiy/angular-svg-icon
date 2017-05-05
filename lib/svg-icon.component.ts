@@ -1,4 +1,5 @@
-import { Component, ElementRef, Input, OnInit, Renderer } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, Optional, Renderer, SkipSelf } from '@angular/core';
+import { Http } from '@angular/http';
 
 import { SvgIconRegistryService } from './svg-icon-registry.service';
 
@@ -34,3 +35,12 @@ export class SvgIconComponent implements OnInit {
 	}
 }
 
+export function SVG_ICON_REGISTRY_PROVIDER_FACTORY(parentRegistry:SvgIconRegistryService, http:Http) {
+	return parentRegistry || new SvgIconRegistryService(http);
+}
+
+export const SVG_ICON_REGISTRY_PROVIDER = {
+	provide: SvgIconRegistryService,
+	deps: [ [new Optional(), new SkipSelf(), SvgIconRegistryService], Http],
+	useFactory: SVG_ICON_REGISTRY_PROVIDER_FACTORY
+}
