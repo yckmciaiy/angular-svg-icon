@@ -1,6 +1,7 @@
 [![npm version](https://badge.fury.io/js/angular-svg-icon.svg)](https://badge.fury.io/js/angular-svg-icon)
 
-Angular SVG Icon =========
+Angular SVG Icon 
+=========
 
 The **angular-svg-icon** is an Angular 2+ service and component that provides a 
 means to inline SVG images to allow for them to be easily styled by CSS and 
