@@ -22,8 +22,8 @@ $ npm i angular-svg-icon --save
 
 ## Integration
 
-Import `HttpModule`, `SvgIconComponent`, and `SvgIconRegistryService` into your
-app's main module. Example:
+The **angular-svg-icon** should work as-is with webpack/angular-cli. Just add 
+the ``AngularSvgIconModule``.
 
 ```typescript
 import { AngularSvgIconModule } from 'angular-svg-icon';
