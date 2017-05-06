@@ -1,46 +1,61 @@
-(function (global) {
+(function(global) {
 
   var ngVer = '@4.0.0';
 
-	var paths = {
-		'npm:' : 'https://unpkg.com/'
-	}
+  var paths = {
+    'npm:' : 'https://unpkg.com/'
+  }
 
-	var map = {
-		'app'        : 'app',
-		'rxjs'       : 'npm:rxjs@5.2.0',
-		'typescript' : 'npm:typescript@2.1.4/lib/typescript.js'
-	};
+  // map tells the System loader where to look for things
+  var map = {
+    'app':  'app',
+    'rxjs': 'npm:rxjs@5.2.0',
+    '@angular': 'npm:@angular',
+	'typescript' : 'npm:typescript@2.2.0/lib/typescript.js',
+    'angular-svg-icon': 'lib'
+  };
 
-	var pkgs = [
-		'common', 'compiler', 'core', 'forms', 'http', 'platform-browser', 'platform-browser-dynamic'
-	];
+  // packages tells the System loader how to load when no filename and/or no extension
+  var packages = {
+    'app':  { main: 'main.ts',  defaultExtension: 'ts' },
+    'rxjs': { defaultExtension: 'js' },
+    'angular-svg-icon': { main: 'index.ts', defaultExtension: 'ts' }
+  };
 
-	pkgs.forEach(function(name) {
-		var key = '@angular/' + name;
-		var value = 'npm:@angular/' + name + ngVer + '/bundles/' + name + '.umd.js';
-		map[key] = value;
-	});
+  var ngPackageNames = [
+    'common',
+    'compiler',
+    'core',
+	'forms',
+    'http',
+    'platform-browser',
+    'platform-browser-dynamic'
+  ];
 
-	System.config({
+  ngPackageNames.forEach(function(pkgName) {
+    map['@angular/'+pkgName] = 'npm:@angular/' + pkgName + ngVer;
+  });
 
-		transpiler: 'typescript',
-    	typescriptOptions: {
-			"emitDecoratorMetadata": true
-		},
+  // Add package entries for angular packages
+  ngPackageNames.forEach(function(pkgName) {
+    packages['@angular/'+pkgName] = { main: '/bundles/' + pkgName + '.umd.js', defaultExtension: 'js' };
+  });
 
-	    paths: paths,
-		map: map,
+  var config = {
+	transpiler: 'typescript',
+    typescriptOptions: {
+      emitDecoratorMetadata: true
+    },
+    paths: paths,
+    map: map,
+    packages: packages
+  }
 
-		packages: {
-			app: {
-        		main: './main.ts',
-				defaultExtension: 'ts'
-			},
-			rxjs: {
-				defaultExtension: 'js'
-			}
-		}
-	});
+  // filterSystemConfig - index.html's chance to modify config before it is registered.
+  if (global.filterSystemConfig) {
+    global.filterSystemConfig(config);
+  }
+
+  System.config(config);
+
 })(this);
-
