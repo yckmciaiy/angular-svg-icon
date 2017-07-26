@@ -1,0 +1,19 @@
+button {
+	-webkit-border-radius: 4;
+	-moz-border-radius: 4;
+	border-radius: 4px;
+	color: #000;
+	font-size: 12px;
+	background: #aaa;
+	padding: 4px 15px;
+	margin: 8px 2px;
+	border: solid #000 1px;
+	text-decoration: none;
+}
+
+button:hover {
+	background: #555;
+	color: #aaa;
+	text-decoration: none;
+}
+
