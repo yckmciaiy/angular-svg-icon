@@ -28,12 +28,14 @@ export class SvgIconComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnDestroy() {
-		this.icnSub.unsubscribe();
+		if (this.icnSub) {
+			this.icnSub.unsubscribe();
+		}
 	}
 
 	private setSvg(svg:SVGElement) {
 		const icon = <SVGElement>svg.cloneNode(true);
-		let elem = this.element.nativeElement;
+		const elem = this.element.nativeElement;
 		elem.innerHTML = '';
 		this.renderer.projectNodes(elem, [icon]);
 	}
@@ -47,4 +49,4 @@ export const SVG_ICON_REGISTRY_PROVIDER = {
 	provide: SvgIconRegistryService,
 	deps: [ [new Optional(), new SkipSelf(), SvgIconRegistryService], Http],
 	useFactory: SVG_ICON_REGISTRY_PROVIDER_FACTORY
-}
+};
