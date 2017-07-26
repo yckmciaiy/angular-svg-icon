@@ -44,4 +44,11 @@ export class SvgIconRegistryService {
 			return o;
 		}
 	}
+
+	unloadSvg(url:string) {
+		if (this.iconsByUrl.has(url)) {
+			this.iconsByUrl.delete(url);
+		}
+	}
+
 }
