@@ -9,6 +9,7 @@ button {
 	margin: 8px 2px;
 	border: solid #000 1px;
 	text-decoration: none;
+	width: 100px;
 }
 
 button:hover {
