@@ -1,5 +1,5 @@
-# About eye.svg
-The eye.svg is modified to remove the height and width attributes from the file 
+# About eye.svg and moon-o.svg
+The svg files were modified to remove the height and width attributes from the file 
 per Sara Soueidan's advice in "[Making SVGs Responsive With 
 CSS](http://tympanus.net/codrops/2014/08/19/making-svgs-responsive-with-css/)".
 
@@ -10,5 +10,7 @@ CSS](http://tympanus.net/codrops/2014/08/19/making-svgs-responsive-with-css/)".
 > present. After removing the height and width, you can embed the SVG in one of 
 > several ways on the page.
  
-The original found as part of the Font-Awesome-SVG-PNG library on GitHub at 
-https://github.com/encharm/Font-Awesome-SVG-PNG/blob/master/black/svg/eye.svg.
+The originals found as part of the Font-Awesome-SVG-PNG library on GitHub at:
+* [eye.svg](https://github.com/encharm/Font-Awesome-SVG-PNG/blob/master/black/svg/eye.svg)
+* [moon.svg](https://github.com/encharm/Font-Awesome-SVG-PNG/blob/master/black/svg/moon-o.svg)
+
