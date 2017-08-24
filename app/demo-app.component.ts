@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SvgIconRegistryService } from 'angular-svg-icon/index';
+import { SvgIconRegistryService } from 'angular-svg-icon';
 
 
 @Component({
@@ -15,6 +15,9 @@ export class DemoAppComponent {
 	private w = 175;
 
 	display = true;
+	img = [ 'images/eye.svg', 'images/moon-o.svg' ];
+	onImg = 0;
+	message = '';
 
 	constructor(private registry:SvgIconRegistryService) {
 	}
@@ -24,7 +27,23 @@ export class DemoAppComponent {
 	}
 
 	unload(url:string) {
-		this.registry.unloadSvg(url);
+		if (this.display) {
+			this.display = false;
+			this.registry.unloadSvg(url);
+
+			setTimeout( () => {
+				this.message = '';
+			}, 2000);
+
+			this.message = url + ' unloaded';
+
+		} else {
+			this.display = true;
+		}
+	}
+
+	swapImg() {
+		this.onImg = (this.onImg === 1 ? 0 : 1);
 	}
 
 }
