@@ -1,4 +1,5 @@
-import { Component, ElementRef, Input, OnDestroy, OnInit, Optional, Renderer, SkipSelf } from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, OnDestroy, OnInit, Optional,
+	Renderer, SimpleChange, SkipSelf } from '@angular/core';
 import { Http } from '@angular/http';
 
 import { Subscription } from 'rxjs/Subscription';
@@ -12,7 +13,7 @@ import { SvgIconRegistryService } from './svg-icon-registry.service';
 	template: '<ng-content></ng-content>'
 })
 
-export class SvgIconComponent implements OnInit, OnDestroy {
+export class SvgIconComponent implements OnInit, OnDestroy, OnChanges {
 	@Input() src:string;
 
 	private icnSub:Subscription;
@@ -22,12 +23,27 @@ export class SvgIconComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnInit() {
+		this.init();
+	}
+
+	ngOnDestroy() {
+		this.destroy();
+	}
+
+	ngOnChanges(changeRecord: {[key:string]:SimpleChange}) {
+		if (changeRecord['src']) {
+			this.destroy();
+			this.init();
+		}
+	}
+
+	private init() {
 		this.icnSub = this.iconReg.loadSvg(this.src).subscribe(svg => {
 			this.setSvg(svg);
 		});
 	}
 
-	ngOnDestroy() {
+	private destroy() {
 		if (this.icnSub) {
 			this.icnSub.unsubscribe();
 		}
@@ -47,6 +63,6 @@ export function SVG_ICON_REGISTRY_PROVIDER_FACTORY(parentRegistry:SvgIconRegistr
 
 export const SVG_ICON_REGISTRY_PROVIDER = {
 	provide: SvgIconRegistryService,
-	deps: [ [new Optional(), new SkipSelf(), SvgIconRegistryService], Http],
+	deps: [ [new Optional(), new SkipSelf(), SvgIconRegistryService], Http ],
 	useFactory: SVG_ICON_REGISTRY_PROVIDER_FACTORY
 };

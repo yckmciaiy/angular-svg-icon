@@ -44,6 +44,33 @@ An example of styling the svg:
 <svg-icon src="images/eye.svg" style="fill:green;width:90px;"></svg-icon>
 ```
 
+Programatic interaction with the registry is also possible.
+Include the ``private iconReg:SvgIconRegistryService`` in the constructor:
+```typescript
+constructor(private iconReg:SvgIconRegistryService) { }
+```
+
+The registry has two public functions: `loadSvg(string)` and `unloadSvg(string)`.
+
+To preload a svg file into the registry: 
+
+```typescript
+{
+   ...
+   this.iconReg.loadSvg('foo.svg');
+}
+``` 
+
+To unload a svg from the registry.
+
+```typescript
+{
+    ...
+    this.iconReg.unloadSvg('foo.svg');
+}
+```
+
+
 ## Background
 
 The svg-icon is an Angular 2 component that allows for the continuation of the 
@@ -67,5 +94,5 @@ MIT
 
 
 ## Author
-- David Czeck [@czeckd](https://github/czeckd)
+- David Czeck [@czeckd](https://github.com/czeckd)
 

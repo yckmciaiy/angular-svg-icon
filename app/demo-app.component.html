@@ -16,17 +16,24 @@
 	</form>
 
 	<div *ngIf="display">
-		<svg-icon src="images/eye.svg" [ngStyle]="{'width': w + 'px', 'fill': 'rgb(' + r + ',' + g + ',' + b + ')' }"></svg-icon>
+		<svg-icon [src]="img[onImg]" [ngStyle]="{'width': w + 'px', 'fill': 'rgb(' + r + ',' + g + ',' + b + ')' }"></svg-icon>
 
-		<pre>&lt;svg-icon src="images/eye.svg" 
+		<pre>&lt;svg-icon src="{{img[onImg]}}" 
   style="{{getStyle()}}"&gt;
 &lt;/svg-icon&gt;</pre>
 	</div>
 
-	<button (click)="unload('images/eye.svg');display=!display">{{display ? 'Unload SVG' : 'Reload SVG'}}</button>
+	<div>
+		<button (click)="swapImg()">Swap SVG</button>
+		<pre style="display:inline-block;">Source {{img[onImg]}}</pre>
+	</div>
+	<div>
+		<button (click)="unload(img[onImg])">{{display ? 'Unload SVG' : 'Reload SVG'}}</button>
+		<pre style="display:inline-block;">{{message}}</pre>
+	</div>
 
 	<div class="explain">
-		<p *ngIf="display">Unloading the SVG will remove it from the registry. The next time the &lt;svg&#8209;icon&gt; is 
+		<p [hidden]="!display">Unloading the SVG will remove it from the registry. The next time the &lt;svg&#8209;icon&gt; is 
 		used with the SVG's URL, the SVG will be loaded again.  Unloading will not remove a SVG already displayed in
 		the document as can be seen by the persistence of the three <svg-icon src="images/eye.svg" class="inline">
 		</svg-icon> SVG at the top of the page.</p>
