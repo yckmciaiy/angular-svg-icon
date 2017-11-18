@@ -1,6 +1,5 @@
-import { Component, ElementRef, Input, OnChanges, OnDestroy, OnInit, Optional,
-	Renderer, SimpleChange, SkipSelf } from '@angular/core';
-import { Http } from '@angular/http';
+import { Component, ElementRef, Input, OnChanges, OnDestroy, OnInit,
+	Renderer, SimpleChange } from '@angular/core';
 
 import { Subscription } from 'rxjs/Subscription';
 
@@ -56,13 +55,3 @@ export class SvgIconComponent implements OnInit, OnDestroy, OnChanges {
 		this.renderer.projectNodes(elem, [icon]);
 	}
 }
-
-export function SVG_ICON_REGISTRY_PROVIDER_FACTORY(parentRegistry:SvgIconRegistryService, http:Http) {
-	return parentRegistry || new SvgIconRegistryService(http);
-}
-
-export const SVG_ICON_REGISTRY_PROVIDER = {
-	provide: SvgIconRegistryService,
-	deps: [ [new Optional(), new SkipSelf(), SvgIconRegistryService], Http ],
-	useFactory: SVG_ICON_REGISTRY_PROVIDER_FACTORY
-};
