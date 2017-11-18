@@ -17,7 +17,7 @@ A [working demo](http://czeckd.github.io/angular-svg-icon/demo/) shows solution 
 ```
 $ npm i angular-svg-icon --save
 ```
-(**Note:** For use Angular 2.4 through Angular 4.2, please install angular-svg-icon@4.2.5
+(**Note:** For use Angular 2.4 through Angular 4.2, please install angular-svg-icon@4.2.6
 and see the module's accompanying README.md for instructions.)
 
 ## Integration
