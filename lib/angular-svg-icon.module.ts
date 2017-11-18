@@ -8,7 +8,6 @@ import { SvgIconComponent } from './svg-icon.component';
 @NgModule({
 	imports:	  [
 		CommonModule,
-//		HttpModule
 	],
 	declarations: [ SvgIconComponent ],
 	providers:    [ SVG_ICON_REGISTRY_PROVIDER ],
