@@ -3,33 +3,34 @@
 Angular SVG Icon 
 =========
 
-The **angular-svg-icon** is an Angular 2+ service and component that provides a 
-means to inline SVG images to allow for them to be easily styled by CSS and 
-code.
+The **angular-svg-icon** is an Angular 4.3+ service and component that provides a 
+means to inline SVG images to allow for them to be easily styled by CSS and code.
 
 The service provides an icon registery that loads and caches a svg indexed by 
 its url. The component is responsible for displaying the svg. After getting the 
 svg from the registry it clones the `SVGElement` and the svg to the component's 
 inner HTML.
 
-A [working demo](http://czeckd.github.io/angular-svg-icon/demo/) shows solution 
-in action.
+A [working demo](http://czeckd.github.io/angular-svg-icon/demo/) shows solution in action.
 
 ## How to use?
 ```
 $ npm i angular-svg-icon --save
 ```
+(**Note:** For use Angular 2.4 through Angular 4.2, please install angular-svg-icon@4.2.5
+and see the module's accompanying README.md for instructions.)
 
 ## Integration
 
-The **angular-svg-icon** should work as-is with webpack/angular-cli. Just add 
-the ``AngularSvgIconModule``.
+The **angular-svg-icon** should work as-is with webpack/angular-cli. Just import the 
+``AngularSvgIconModule`` and the ```HttpClientModule```.
 
 ```typescript
+import { HttpClientModule } from '@angular/common/http';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 
 @NgModule({
-    imports: [ AngularSvgIconModule ],
+    imports: [ HttpClientModule, AngularSvgIconModule ],
     ...
 })
 export class AppModule {}
@@ -70,6 +71,11 @@ To unload a svg from the registry.
 }
 ```
 
+## SVG Preparation
+The SVG should be modified to remove the height and width attributes from the file
+per Sara Soueidan's advice in "[Making SVGs Responsive With
+CSS](http://tympanus.net/codrops/2014/08/19/making-svgs-responsive-with-css/)" if
+size is to be modified through CSS.
 
 ## Background
 
