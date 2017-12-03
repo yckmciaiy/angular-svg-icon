@@ -1,10 +1,9 @@
 export default {
-	format: 'umd',
-	moduleName: 'angular-svg-icon',
+	name: 'angular-svg-icon',
 	external: [
 		'@angular/common',
+		'@angular/common/http',
 		'@angular/core',
-		'@angular/http',
         'rxjs/add/observable/of',
         'rxjs/add/operator/do',
         'rxjs/add/operator/finally',
@@ -14,8 +13,8 @@ export default {
 	],
     globals: {
         '@angular/common': 'ng.common',
+		'@angular/common/http': 'ng.common.http',
         '@angular/core': 'ng.core',
-        '@angular/http': 'ng.http',
 		'rxjs/add/observable/of' : 'Rx.Observable',
 		'rxjs/add/operator/do' : 'Rx.Observable.prototype',
 		'rxjs/add/operator/finally' : 'Rx.Observable.prototype',
@@ -31,6 +30,9 @@ export default {
 		if ( skip_codes.indexOf(warning.code) != -1 )
 			return;
 		console.error(warning);
+	},
+	output: {
+		format: 'umd'
 	}
 };
 

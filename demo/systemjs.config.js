@@ -1,61 +1,57 @@
 (function(global) {
 
-  var ngVer = '@4.0.0';
+	var ngVer = '@5.0.0';
 
-  var paths = {
-    'npm:' : 'https://unpkg.com/'
-  }
+	var paths = {
+		'npm:' : 'https://unpkg.com/'
+	}
 
-  // map tells the System loader where to look for things
-  var map = {
-    'app':  'app',
-    'rxjs': 'npm:rxjs@5.2.0',
-    '@angular': 'npm:@angular',
-	'typescript' : 'npm:typescript@2.2.0/lib/typescript.js',
-    'angular-svg-icon': 'lib'
-  };
+	// map tells the System loader where to look for things
+	var map = {
+		'app':	'app',
+		'angular-svg-icon': 'lib',
+		'rxjs': 'npm:rxjs@5.5.2',
+        'tslib': 'npm:tslib@1.7.1',
+		'typescript' : 'npm:typescript@2.4.2/lib/typescript.js',
 
-  // packages tells the System loader how to load when no filename and/or no extension
-  var packages = {
-    'app':  { main: 'main.ts',  defaultExtension: 'ts' },
-    'rxjs': { defaultExtension: 'js' },
-    'angular-svg-icon': { main: 'index.ts', defaultExtension: 'ts' }
-  };
+        '@angular/core': 'npm:@angular/core/bundles/core.umd.js',
+        '@angular/common': 'npm:@angular/common/bundles/common.umd.js',
+        '@angular/common/http': 'npm:@angular/common/bundles/common-http.umd.js',
+        '@angular/compiler': 'npm:@angular/compiler/bundles/compiler.umd.js',
+        '@angular/platform-browser': 'npm:@angular/platform-browser/bundles/platform-browser.umd.js',
+        '@angular/platform-browser-dynamic': 'npm:@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js',
+        '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js'
+	};
 
-  var ngPackageNames = [
-    'common',
-    'compiler',
-    'core',
-	'forms',
-    'http',
-    'platform-browser',
-    'platform-browser-dynamic'
-  ];
+	// packages tells the System loader how to load when no filename and/or no extension
+	var packages = {
+		'app':	{ main: 'main.ts', defaultExtension: 'ts' },
+		'angular-svg-icon': { main: 'index.ts', defaultExtension: 'ts' },
 
-  ngPackageNames.forEach(function(pkgName) {
-    map['@angular/'+pkgName] = 'npm:@angular/' + pkgName + ngVer;
-  });
+		'rxjs': { defaultExtension: 'js' },
+        'tslib': { main: 'tslib.js', defaultExtension: 'js' }
+    };
 
-  // Add package entries for angular packages
-  ngPackageNames.forEach(function(pkgName) {
-    packages['@angular/'+pkgName] = { main: '/bundles/' + pkgName + '.umd.js', defaultExtension: 'js' };
-  });
+	var config = {
+		transpiler: 'typescript',
+		typescriptOptions: {
+			sourceMap: true,
+			emitDecoratorMetadata: true,
+			experimentalDecorators: true
+		},
+		meta: {
+			typescript: { exports: 'ts' }
+		},
+		paths: paths,
+		map: map,
+		packages: packages
+	}
 
-  var config = {
-	transpiler: 'typescript',
-    typescriptOptions: {
-      emitDecoratorMetadata: true
-    },
-    paths: paths,
-    map: map,
-    packages: packages
-  }
+	// filterSystemConfig - index.html's chance to modify config before it is registered.
+	if (global.filterSystemConfig) {
+		global.filterSystemConfig(config);
+	}
 
-  // filterSystemConfig - index.html's chance to modify config before it is registered.
-  if (global.filterSystemConfig) {
-    global.filterSystemConfig(config);
-  }
-
-  System.config(config);
+	System.config(config);
 
 })(this);
