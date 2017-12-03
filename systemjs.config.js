@@ -1,51 +1,39 @@
 (function(global) {
 
-  // map tells the System loader where to look for things
-  var map = {
-    'app':      'runt/app',
-    'rxjs':     'node_modules/rxjs',
-    '@angular': 'node_modules/@angular',
-    'angular-svg-icon': 'runt/lib'
-  };
+	// map tells the System loader where to look for things
+	var map = {
+		'app': 'runt/app',
+		'angular-svg-icon': 'runt/lib',
 
-  // packages tells the System loader how to load when no filename and/or no extension
-  var packages = {
-    'app':   { main: 'main.js',  defaultExtension: 'js' },
-    'rxjs':  { defaultExtension: 'js' },
-    'angular-svg-icon':   { main: 'index.js', defaultExtension: 'js' }
-  };
+		'rxjs': 'npm:rxjs',
+		'tslib': 'npm:tslib',
 
-  var ngPackageNames = [
-    'common',
-    'compiler',
-    'core',
-    'forms',
-    'http',
-    'platform-browser',
-    'platform-browser-dynamic'
-  ];
+		'@angular/core': 'npm:@angular/core/bundles/core.umd.js',
+		'@angular/common': 'npm:@angular/common/bundles/common.umd.js',
+		'@angular/common/http': 'npm:@angular/common/bundles/common-http.umd.js',
+		'@angular/compiler': 'npm:@angular/compiler/bundles/compiler.umd.js',
+		'@angular/platform-browser': 'npm:@angular/platform-browser/bundles/platform-browser.umd.js',
+		'@angular/platform-browser-dynamic': 'npm:@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js',
+		'@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js'
+	};
 
-  // Individual files (~300 requests):
-  function packIndex(pkgName) {
-    packages['@angular/'+pkgName] = { main: 'index.js', defaultExtension: 'js' };
-  }
+	// packages tells the System loader how to load when no filename and/or no extension
+	var packages = {
+		'app': { main: 'main.js',  defaultExtension: 'js' },
+		'angular-svg-icon': { main: 'index.js', defaultExtension: 'js' },
 
-  // Bundled (~40 requests):
-  function packUmd(pkgName) {
-    packages['@angular/'+pkgName] = { main: '/bundles/' + pkgName + '.umd.js', defaultExtension: 'js' };
-  }
+		'rxjs':  { defaultExtension: 'js' },
+		'tslib': { main: 'tslib.js', defaultExtension: 'js' },
+	};
 
-  // Most environments should use UMD; some (Karma) need the individual index files
-  var setPackageConfig = System.packageWithIndex ? packIndex : packUmd;
+	var config = {
+		paths: {
+			'npm:': 'node_modules/'
+		},
+		map: map,
+		packages: packages
+	};
 
-  // Add package entries for angular packages
-  ngPackageNames.forEach(setPackageConfig);
-
-  var config = {
-    map: map,
-    packages: packages
-  };
-
-  System.config(config);
+ 	System.config(config);
 
 })(this);

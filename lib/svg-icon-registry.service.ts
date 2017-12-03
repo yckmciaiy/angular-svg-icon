@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Injectable, Optional, SkipSelf } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 
@@ -16,7 +16,7 @@ export class SvgIconRegistryService {
 	private iconsByUrl = new Map<string, SVGElement>();
 	private iconsLoadingByUrl = new Map<string, Observable<SVGElement>>();
 
-	constructor(private http:Http) {
+	constructor(private http:HttpClient) {
 	}
 
 	loadSvg(url:string): Observable<SVGElement> {
@@ -26,10 +26,10 @@ export class SvgIconRegistryService {
 		} else if (this.iconsLoadingByUrl.has(url)) {
 			return this.iconsLoadingByUrl.get(url);
 		} else {
-			const o = <Observable<SVGElement>> this.http.get( url )
-				.map( (res:Response) => {
+			const o = <Observable<SVGElement>> this.http.get(url, { responseType: 'text' })
+				.map(svg => {
 					const div = document.createElement('DIV');
-					div.innerHTML = res.text();
+					div.innerHTML = svg;
 					return <SVGElement>div.querySelector('svg');
 				})
 				.do(svg => {
@@ -52,3 +52,13 @@ export class SvgIconRegistryService {
 	}
 
 }
+
+export function SVG_ICON_REGISTRY_PROVIDER_FACTORY(parentRegistry:SvgIconRegistryService, http:HttpClient) {
+	return parentRegistry || new SvgIconRegistryService(http);
+}
+
+export const SVG_ICON_REGISTRY_PROVIDER = {
+	provide: SvgIconRegistryService,
+	deps: [ [new Optional(), new SkipSelf(), SvgIconRegistryService], HttpClient ],
+	useFactory: SVG_ICON_REGISTRY_PROVIDER_FACTORY
+};
