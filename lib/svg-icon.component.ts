@@ -70,21 +70,17 @@ export class SvgIconComponent implements OnInit, OnDestroy, OnChanges {
 		}
 	}
 
-	private clearStyles(icon:Node) {
-		if (icon.style) {
-			while (icon.style.length) {
-				let i = icon.style.length - 1;
-				this.renderer2.removeStyle(icon, icon.style[i]);
-			}
-		}
-	}
-
 	private stylize() {
 		if (this.svg) {
 			const elem = this.element.nativeElement;
 			const icon = elem.firstChild;
 
-			this.clearStyles(icon);
+			if (icon.style) {
+				while (icon.style.length) {
+					let i = icon.style.length - 1;
+					this.renderer2.removeStyle(icon, icon.style[i]);
+				}
+			}
 
 			if (this.stretch === true) {
 				this.renderer2.setAttribute(icon, 'preserveAspectRatio', 'none');
