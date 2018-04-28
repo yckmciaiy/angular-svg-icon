@@ -1,6 +1,6 @@
-import { Component, ElementRef, HostBinding, Input, OnChanges, OnDestroy, OnInit,
-	Renderer2, RendererStyleFlags2, SimpleChange } from '@angular/core';
-import { NgStyle } from '@angular/common';
+import { Component, DoCheck, ElementRef, HostBinding, Input,
+	KeyValueChangeRecord, KeyValueChanges, KeyValueDiffer, KeyValueDiffers,
+	OnChanges, OnDestroy, OnInit, Renderer2, SimpleChange } from '@angular/core';
 
 import { Subscription } from 'rxjs/Subscription';
 
@@ -13,16 +13,27 @@ import { SvgIconRegistryService } from './svg-icon-registry.service';
 	template: '<ng-content></ng-content>'
 })
 
-export class SvgIconComponent implements OnInit, OnDestroy, OnChanges {
+export class SvgIconComponent implements OnInit, OnDestroy, OnChanges, DoCheck {
 	@Input() src:string;
 	@Input() stretch = false;
-	@Input() svgStyle:NgStyle;
+
+	// Adapted from ngStyle
+	@Input()
+	set svgStyle(v: {[key:string]: string }) {
+		this._svgStyle = v;
+		if (!this.differ && v) {
+			this.differ = this.differs.find(v).create();
+		}
+	}
 
 	private svg:SVGElement;
 	private icnSub:Subscription;
+	private differ:KeyValueDiffer<string, string|number>;
+	private _svgStyle: {[key: string] : string};
 
 	constructor(private element:ElementRef,
-		private renderer2:Renderer2,
+		private differs:KeyValueDiffers,
+		private renderer:Renderer2,
 		private iconReg:SvgIconRegistryService) {
 	}
 
@@ -39,9 +50,17 @@ export class SvgIconComponent implements OnInit, OnDestroy, OnChanges {
 			this.destroy();
 			this.init();
 		}
-
-		if (changeRecord['stretch'] || changeRecord['svgStyle']) {
+		if (changeRecord['stretch']) {
 			this.stylize();
+		}
+	}
+
+	ngDoCheck() {
+		if (this.svg && this.differ) {
+			const changes = this.differ.diff(this._svgStyle);
+			if (changes) {
+				this.applyChanges(changes);
+			}
 		}
 	}
 
@@ -64,7 +83,7 @@ export class SvgIconComponent implements OnInit, OnDestroy, OnChanges {
 			const elem = this.element.nativeElement;
 
 			elem.innerHTML = '';
-			this.renderer2.appendChild(elem, icon);
+			this.renderer.appendChild(elem, icon);
 
 			this.stylize();
 		}
@@ -72,27 +91,31 @@ export class SvgIconComponent implements OnInit, OnDestroy, OnChanges {
 
 	private stylize() {
 		if (this.svg) {
-			const elem = this.element.nativeElement;
-			const icon = elem.firstChild;
-
-			if (icon.style) {
-				while (icon.style.length) {
-					let i = icon.style.length - 1;
-					this.renderer2.removeStyle(icon, icon.style[i]);
-				}
-			}
+			const svg = this.element.nativeElement.firstChild;
 
 			if (this.stretch === true) {
-				this.renderer2.setAttribute(icon, 'preserveAspectRatio', 'none');
+				this.renderer.setAttribute(svg, 'preserveAspectRatio', 'none');
 			} else if (this.stretch === false) {
-				this.renderer2.removeAttribute(icon, 'preserveAspectRatio');
+				this.renderer.removeAttribute(svg, 'preserveAspectRatio');
 			}
+		}
+	}
 
-			if (this.svgStyle) {
-				for (let key in this.svgStyle) {
-					this.renderer2.setStyle(icon, key, this.svgStyle[key]);
-				}
-			}
+	private applyChanges(changes: KeyValueChanges<string, string|number>) {
+		changes.forEachRemovedItem((record:KeyValueChangeRecord<string, string|number>) => this.setStyle(record.key, null));
+		changes.forEachAddedItem((record:KeyValueChangeRecord<string, string|number>) => this.setStyle(record.key, record.currentValue));
+		changes.forEachChangedItem((record:KeyValueChangeRecord<string, string|number>) => this.setStyle(record.key, record.currentValue));
+	}
+
+	private setStyle(nameAndUnit: string, value: string|number|null|undefined) {
+		const [name, unit] = nameAndUnit.split('.');
+		value = value !== null && unit ? `${value}${unit}` : value;
+		const svg = this.element.nativeElement.firstChild;
+
+		if (value !== null) {
+			this.renderer.setStyle(svg, name, value as string);
+		} else {
+			this.renderer.removeStyle(svg, name);
 		}
 	}
 }

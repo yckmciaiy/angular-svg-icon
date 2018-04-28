@@ -40,11 +40,11 @@ export class DemoAppComponent {
 		const style:any = {};
 
 		if (!this.autoheight) {
-			style.height = this.h + 'px';
+			style['height.px'] = this.h;
 		}
 
 		if (!this.autowidth) {
-			style.width = this.w + 'px';
+			style['width.px'] = this.w;
 		}
 
 		style.fill = 'rgb(' + this.r + ',' + this.g + ',' + this.b + ')';
@@ -54,11 +54,11 @@ export class DemoAppComponent {
 		}
 
 		if (this.p > 0) {
-			style.padding = this.p + 'px';
+			style['padding.px'] = this.p;
 		}
 
 		if (this.m > 0) {
-			style.margin = this.m + 'px';
+			style['margin.px'] = this.m;
 		}
 
 		if (this.o < 1.0) {
