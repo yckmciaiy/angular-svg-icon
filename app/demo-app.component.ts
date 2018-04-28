@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+
 import { SvgIconRegistryService } from 'angular-svg-icon';
 
 
@@ -9,12 +10,21 @@ import { SvgIconRegistryService } from 'angular-svg-icon';
 })
 
 export class DemoAppComponent {
-	private r = 120;
-	private g = 120;
-	private b = 120;
-	private w = 175;
+	r = 120;
+	g = 120;
+	b = 120;
+	w = 175;
+	h = 175;
+	p = 0;
+	m = 0;
+	o = 1.0;
 
+	autoheight = true;
+	autowidth = false;
+	stretch = false;
+	border = false;
 	display = true;
+
 	img = [ 'images/eye.svg', 'images/moon-o.svg' ];
 	onImg = 0;
 	message = '';
@@ -23,7 +33,39 @@ export class DemoAppComponent {
 	}
 
 	getStyle(): string {
-		return 'width:' + this.w + 'px;fill:rgb(' + this.r + ',' + this.g + ',' + this.b + ');';
+		return JSON.stringify(this.getNgStyle()).replace(/\"/g, '\'');
+	}
+
+	getNgStyle() {
+		const style:any = {};
+
+		if (!this.autoheight) {
+			style['height.px'] = this.h;
+		}
+
+		if (!this.autowidth) {
+			style['width.px'] = this.w;
+		}
+
+		style.fill = 'rgb(' + this.r + ',' + this.g + ',' + this.b + ')';
+
+		if (this.border) {
+			style.border = '1px solid black';
+		}
+
+		if (this.p > 0) {
+			style['padding.px'] = this.p;
+		}
+
+		if (this.m > 0) {
+			style['margin.px'] = this.m;
+		}
+
+		if (this.o < 1.0) {
+			style.opacity = this.o;
+		}
+
+		return style;
 	}
 
 	unload(url:string) {
@@ -45,5 +87,4 @@ export class DemoAppComponent {
 	swapImg() {
 		this.onImg = (this.onImg === 1 ? 0 : 1);
 	}
-
 }
