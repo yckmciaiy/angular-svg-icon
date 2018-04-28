@@ -4,8 +4,8 @@ export default {
 		'@angular/common',
 		'@angular/common/http',
 		'@angular/core',
-        'rxjs/add/observable/of',
-        'rxjs/add/operator/catch',
+		'rxjs/add/observable/of',
+		'rxjs/add/operator/catch',
 		'rxjs/add/observable/throw',
         'rxjs/add/operator/do',
         'rxjs/add/operator/finally',
@@ -40,4 +40,3 @@ export default {
 		format: 'umd'
 	}
 };
-
