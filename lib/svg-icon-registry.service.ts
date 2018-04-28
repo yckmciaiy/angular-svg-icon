@@ -38,8 +38,8 @@ export class SvgIconRegistryService {
 					this.iconsByUrl.set(url, svg);
 				})
 				.catch(err => {
-console.log(err);
-return Observable.throw(err);
+					console.error(err);
+					return Observable.throw(err);
 				})
 				.finally(() => {
 					this.iconsLoadingByUrl.delete(url);
