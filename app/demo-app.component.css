@@ -1,3 +1,7 @@
+.portal {
+	margin: 15px;
+}
+
 button {
 	-webkit-border-radius: 4;
 	-moz-border-radius: 4;
@@ -57,6 +61,15 @@ fieldset {
 	border: none;
 }
 
+
 fieldset input {
 	margin-right: 10px;
+}
+
+
+span.px:after {
+	content: ' px';
+	margin-left: -10px;
+	margin-right: 10px;
+	font-size: smaller;
 }
