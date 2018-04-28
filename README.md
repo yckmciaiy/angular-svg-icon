@@ -42,7 +42,7 @@ Basic usage is:
 ```
 *Note that without a height or width set, the SVG may not display!*
 
-More complex styling can be applied to the svg:
+More complex styling can be applied to the svg, for example:
 ```html
 <svg-icon src="images/eye.svg" [stretch]="true"
   [svgStyle]="{'width.px':170,'fill':'rgb(150,50,255)','padding.px':1,'margin.px':3}">
@@ -52,8 +52,7 @@ More complex styling can be applied to the svg:
 The following attributes can be set on svg-icon:
 - **src** - The path to SVG.
 - **[svgStyle]** - Styles to be applied to the SVG, this is based on the familiar [ngStyle].
-- **[stretch]** - A boolean (default is false) that, when true, sets `preserveAspectRatio="none"` on the SVG. This is useful for using with height and width styles.
-
+- **[stretch]** - A boolean (default is false) that, when true, sets `preserveAspectRatio="none"` on the SVG. This is useful for setting both the height and width styles to strech *or* distort the svg.
 
 Programatic interaction with the registry is also possible.
 Include the ``private iconReg:SvgIconRegistryService`` in the constructor:
