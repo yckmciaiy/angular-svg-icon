@@ -47,7 +47,9 @@ export class SvgIconComponent implements OnInit, OnDestroy, OnChanges, DoCheck {
 
 	ngOnChanges(changeRecord: {[key:string]:SimpleChange}) {
 		if (changeRecord['src']) {
-			this.destroy();
+			if (this.svg) {
+				this.destroy();
+			}
 			this.init();
 		}
 		if (changeRecord['stretch']) {
@@ -67,12 +69,23 @@ export class SvgIconComponent implements OnInit, OnDestroy, OnChanges, DoCheck {
 	private init() {
 		this.icnSub = this.iconReg.loadSvg(this.src).subscribe(svg => {
 			this.setSvg(svg);
+			this.resetDiffer();
 		});
 	}
 
 	private destroy() {
+		this.svg = undefined;
+		this.differ = undefined;
 		if (this.icnSub) {
 			this.icnSub.unsubscribe();
+		}
+	}
+
+	private resetDiffer() {
+		if (this._svgStyle) {
+			if (!this.differ) {
+				this.differ = this.differs.find(this._svgStyle).create();
+			}
 		}
 	}
 
