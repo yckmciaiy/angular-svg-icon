@@ -82,10 +82,8 @@ export class SvgIconComponent implements OnInit, OnDestroy, OnChanges, DoCheck {
 	}
 
 	private resetDiffer() {
-		if (this._svgStyle) {
-			if (!this.differ) {
-				this.differ = this.differs.find(this._svgStyle).create();
-			}
+		if (this._svgStyle && !this.differ) {
+			this.differ = this.differs.find(this._svgStyle).create();
 		}
 	}
 

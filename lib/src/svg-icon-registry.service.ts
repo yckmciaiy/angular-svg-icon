@@ -21,6 +21,15 @@ export class SvgIconRegistryService {
 	constructor(private http:HttpClient) {
 	}
 
+	addSvg(name:string, data:string) {
+		if (!this.iconsByUrl.has(name)) {
+			const div = document.createElement('DIV');
+			div.innerHTML = data;
+			const svg = <SVGElement>div.querySelector('svg');
+			this.iconsByUrl.set(name, svg);
+		}
+	}
+
 	loadSvg(url:string): Observable<SVGElement> {
 
 		if (this.iconsByUrl.has(url)) {
@@ -56,7 +65,6 @@ export class SvgIconRegistryService {
 			this.iconsByUrl.delete(url);
 		}
 	}
-
 }
 
 export function SVG_ICON_REGISTRY_PROVIDER_FACTORY(parentRegistry:SvgIconRegistryService, http:HttpClient) {
