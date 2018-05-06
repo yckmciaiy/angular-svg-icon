@@ -73,11 +73,11 @@ To preload a SVG file from a URL into the registry:
 }
 ```
 To add a SVG from a sting:
-```
+```typescript
 {
   ...
-  this.inconReg.addSvg('box',
-   '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><path d="M1 1 L1 9 L9 9 L9 1 Z" /></svg>'
+  this.iconReg.addSvg('box',
+   '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><path d="M1 1 L1 9 L9 9 L9 1 Z"/></svg>'
   );
 }
 ```
