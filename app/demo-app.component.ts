@@ -32,7 +32,7 @@ export class DemoAppComponent {
 	constructor(private registry:SvgIconRegistryService) {
 	}
 
-	getStyle(): string {
+	getStyle() :string {
 		return JSON.stringify(this.getNgStyle()).replace(/\"/g, '\'');
 	}
 

@@ -1,16 +1,8 @@
 import { Injectable, Optional, SkipSelf } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Observable } from 'rxjs/Observable';
-
-import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/finally';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/share';
-import 'rxjs/add/observable/throw';
-
+import { Observable, of as observableOf, throwError as observableThrowError } from 'rxjs';
+import { map, tap, catchError, finalize, share } from 'rxjs/operators';
 
 @Injectable()
 export class SvgIconRegistryService {
@@ -21,6 +13,7 @@ export class SvgIconRegistryService {
 	constructor(private http:HttpClient) {
 	}
 
+	/** Add a SVG to the registry by passing a name and the SVG. */
 	addSvg(name:string, data:string) {
 		if (!this.iconsByUrl.has(name)) {
 			const div = document.createElement('DIV');
@@ -30,36 +23,35 @@ export class SvgIconRegistryService {
 		}
 	}
 
-	loadSvg(url:string): Observable<SVGElement> {
+	/** Load a SVG to the registry from a URL. */
+	loadSvg(url:string) : Observable<SVGElement> {
 
 		if (this.iconsByUrl.has(url)) {
-			return Observable.of(this.iconsByUrl.get(url));
+			return observableOf(this.iconsByUrl.get(url));
 		} else if (this.iconsLoadingByUrl.has(url)) {
 			return this.iconsLoadingByUrl.get(url);
 		} else {
-			const o = <Observable<SVGElement>> this.http.get(url, { responseType: 'text' })
-				.map(svg => {
+			const o = <Observable<SVGElement>> this.http.get(url, { responseType: 'text' }).pipe(
+				map(svg => {
 					const div = document.createElement('DIV');
 					div.innerHTML = svg;
 					return <SVGElement>div.querySelector('svg');
-				})
-				.do(svg => {
-					this.iconsByUrl.set(url, svg);
-				})
-				.catch(err => {
+				}),
+				tap (svg => this.iconsByUrl.set(url, svg) ),
+				catchError(err => {
 					console.error(err);
-					return Observable.throw(err);
-				})
-				.finally(() => {
-					this.iconsLoadingByUrl.delete(url);
-				})
-				.share();
+					return observableThrowError(err);
+				}),
+				finalize(() => this.iconsLoadingByUrl.delete(url) ),
+				share()
+			);
 
 			this.iconsLoadingByUrl.set(url, o);
 			return o;
 		}
 	}
 
+	/** Remove a SVG from the registry by URL (or name). */
 	unloadSvg(url:string) {
 		if (this.iconsByUrl.has(url)) {
 			this.iconsByUrl.delete(url);
