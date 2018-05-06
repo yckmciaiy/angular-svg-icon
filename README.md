@@ -17,7 +17,7 @@ This [demo](http://czeckd.github.io/angular-svg-icon/demo/) shows this module in
 ```
 $ npm i angular-svg-icon --save
 ```
-**Note on earlyer versions of ngx:** 
+**Note on earlier versions of ngx:** 
 - For Angular 4.3 through Angular 5.x, use angular-svg-icon@5.1.1
 - For Angular 2.4 through Angular 4.2, use angular-svg-icon@4.2.6
 
@@ -68,16 +68,17 @@ The registry has three public functions: `loadSvg(string)`, `addSvg(string, stri
 To preload a SVG file from a URL into the registry:
 ```typescript
 {
- ...
- this.iconReg.loadSvg('foo.svg');
+  ...
+  this.iconReg.loadSvg('foo.svg');
 }
 ```
 To add a SVG from a sting:
 ```
 {
- ...
- this.inconReg.addSvg('box',
-   '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><path d="M1 1 L1 9 L9 9 L9 1 Z" /></svg>');
+  ...
+  this.inconReg.addSvg('box',
+   '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><path d="M1 1 L1 9 L9 9 L9 1 Z" /></svg>'
+  );
 }
 ```
 To unload a SVG from the registry.
