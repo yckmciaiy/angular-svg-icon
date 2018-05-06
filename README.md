@@ -3,7 +3,7 @@
 Angular SVG Icon
 =========
 
-The **angular-svg-icon** is an Angular 4.3+ service and component that provides a
+The **angular-svg-icon** is an Angular 6 service and component that provides a
 means to inline SVG files to allow for them to be easily styled by CSS and code.
 
 The service provides an icon registery that loads and caches a SVG indexed by
@@ -11,14 +11,17 @@ its url. The component is responsible for displaying the SVG. After getting the
 svg from the registry it clones the `SVGElement` and the SVG to the component's
 inner HTML.
 
-A [working demo](http://czeckd.github.io/angular-svg-icon/demo/) shows solution in action.
+This [demo](http://czeckd.github.io/angular-svg-icon/demo/) shows this module in action.
 
 ## How to use?
 ```
 $ npm i angular-svg-icon --save
 ```
-(**Note:** For use Angular 2.4 through Angular 4.2, please install angular-svg-icon@4.2.6
-and see the module's accompanying README.md for instructions.)
+**Note on earlier versions of ngx:** 
+- For Angular 4.3 through Angular 5.x, use angular-svg-icon@5.1.1
+- For Angular 2.4 through Angular 4.2, use angular-svg-icon@4.2.6
+
+See the module's accompanying README.md for instructions.
 
 ## Integration
 
@@ -30,8 +33,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 
 @NgModule({
-    imports: [ HttpClientModule, AngularSvgIconModule ],
-    ...
+  imports: [ HttpClientModule, AngularSvgIconModule ],
+  ...
 })
 export class AppModule {}
 ```
@@ -60,23 +63,29 @@ Include the ``private iconReg:SvgIconRegistryService`` in the constructor:
 constructor(private iconReg:SvgIconRegistryService) { }
 ```
 
-The registry has two public functions: `loadSvg(string)` and `unloadSvg(string)`.
+The registry has three public functions: `loadSvg(string)`, `addSvg(string, string)`, and `unloadSvg(string)`.
 
-To preload a svg file into the registry:
-
+To preload a SVG file from a URL into the registry:
 ```typescript
 {
-   ...
-   this.iconReg.loadSvg('foo.svg');
+  ...
+  this.iconReg.loadSvg('foo.svg');
 }
 ```
-
-To unload a svg from the registry.
-
+To add a SVG from a sting:
 ```typescript
 {
-    ...
-    this.iconReg.unloadSvg('foo.svg');
+  ...
+  this.iconReg.addSvg('box',
+   '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><path d="M1 1 L1 9 L9 9 L9 1 Z"/></svg>'
+  );
+}
+```
+To unload a SVG from the registry.
+```typescript
+{
+  ...
+  this.iconReg.unloadSvg('foo.svg');
 }
 ```
 

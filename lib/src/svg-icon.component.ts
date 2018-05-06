@@ -2,7 +2,7 @@ import { Component, DoCheck, ElementRef, HostBinding, Input,
 	KeyValueChangeRecord, KeyValueChanges, KeyValueDiffer, KeyValueDiffers,
 	OnChanges, OnDestroy, OnInit, Renderer2, SimpleChange } from '@angular/core';
 
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
 import { SvgIconRegistryService } from './svg-icon-registry.service';
 
@@ -29,7 +29,7 @@ export class SvgIconComponent implements OnInit, OnDestroy, OnChanges, DoCheck {
 	private svg:SVGElement;
 	private icnSub:Subscription;
 	private differ:KeyValueDiffer<string, string|number>;
-	private _svgStyle: {[key: string] : string};
+	private _svgStyle: {[key:string]:string};
 
 	constructor(private element:ElementRef,
 		private differs:KeyValueDiffers,
@@ -82,10 +82,8 @@ export class SvgIconComponent implements OnInit, OnDestroy, OnChanges, DoCheck {
 	}
 
 	private resetDiffer() {
-		if (this._svgStyle) {
-			if (!this.differ) {
-				this.differ = this.differs.find(this._svgStyle).create();
-			}
+		if (this._svgStyle && !this.differ) {
+			this.differ = this.differs.find(this._svgStyle).create();
 		}
 	}
 

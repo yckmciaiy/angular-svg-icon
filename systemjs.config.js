@@ -6,6 +6,7 @@
 		'angular-svg-icon': 'runt/lib',
 
 		'rxjs': 'npm:rxjs',
+		'rxjs/operators': 'npm:rxjs/operators',
 		'tslib': 'npm:tslib',
 
 		'@angular/core': 'npm:@angular/core/bundles/core.umd.js',
@@ -19,11 +20,26 @@
 
 	// packages tells the System loader how to load when no filename and/or no extension
 	var packages = {
-		'app': { main: 'main.js',  defaultExtension: 'js' },
-		'angular-svg-icon': { main: 'index.js', defaultExtension: 'js' },
-
-		'rxjs':  { defaultExtension: 'js' },
-		'tslib': { main: 'tslib.js', defaultExtension: 'js' },
+		'app': {
+			'main': 'main.js',
+			'defaultExtension': 'js'
+		},
+		'angular-svg-icon': {
+			'main': 'index.js',
+			'defaultExtension': 'js'
+		},
+		'rxjs': {
+			'main': 'index.js',
+			'defaultExtension': 'js'
+		},
+		'rxjs/operators': {
+			'main': 'index.js',
+			'defaultExtension': 'js'
+		},
+		'tslib': {
+			'main': 'tslib.js',
+			'defaultExtension': 'js'
+		}
 	};
 
 	var config = {
