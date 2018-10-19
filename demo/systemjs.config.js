@@ -1,6 +1,6 @@
 (function(global) {
 
-  var ngVer = '@6.0.0';
+  var ngVer = '@7.0.0';
 
   var paths = {
     'npm:' : 'https://unpkg.com/'
@@ -10,10 +10,10 @@
   var map = {
     'app':  'app',
     'angular-svg-icon': 'lib',
-    'rxjs': 'npm:rxjs@6.1.0',
-    'rxjs/operators': 'npm:rxjs@6.1.0/operators',
-    'tslib': 'npm:tslib@1.7.1',
-    'typescript' : 'npm:typescript@2.4.2/lib/typescript.js',
+    'rxjs': 'npm:rxjs@6.3.3',
+    'rxjs/operators': 'npm:rxjs@6.3.3/operators',
+    'tslib': 'npm:tslib@1.9.3',
+    'typescript' : 'npm:typescript@3.1.3/lib/typescript.js',
 
     '@angular/core': 'npm:@angular/core/bundles/core.umd.js',
     '@angular/common': 'npm:@angular/common/bundles/common.umd.js',
