@@ -72,7 +72,14 @@ To preload a SVG file from a URL into the registry:
   this.iconReg.loadSvg('foo.svg');
 }
 ```
-To add a SVG from a sting:
+To preload a SVG file from a URL into the registry with predefined name:
+```typescript
+{
+  ...
+  this.iconReg.loadSvg('foo.svg', 'foo');
+}
+```
+To add a SVG from a string:
 ```typescript
 {
   ...
