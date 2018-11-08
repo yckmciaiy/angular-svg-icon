@@ -24,12 +24,12 @@ export class SvgIconRegistryService {
 	}
 
 	/** Load a SVG to the registry from a URL. */
-	loadSvg(url:string) : Observable<SVGElement> {
+	loadSvg(url:string, name: string = url): Observable<SVGElement> {
 
-		if (this.iconsByUrl.has(url)) {
-			return observableOf(this.iconsByUrl.get(url));
-		} else if (this.iconsLoadingByUrl.has(url)) {
-			return this.iconsLoadingByUrl.get(url);
+		if (this.iconsByUrl.has(name)) {
+			return observableOf(this.iconsByUrl.get(name));
+		} else if (this.iconsLoadingByUrl.has(name)) {
+			return this.iconsLoadingByUrl.get(name);
 		} else {
 			const o = <Observable<SVGElement>> this.http.get(url, { responseType: 'text' }).pipe(
 				map(svg => {
@@ -37,16 +37,16 @@ export class SvgIconRegistryService {
 					div.innerHTML = svg;
 					return <SVGElement>div.querySelector('svg');
 				}),
-				tap (svg => this.iconsByUrl.set(url, svg) ),
+				tap (svg => this.iconsByUrl.set(name, svg) ),
 				catchError(err => {
 					console.error(err);
 					return observableThrowError(err);
 				}),
-				finalize(() => this.iconsLoadingByUrl.delete(url) ),
+				finalize(() => this.iconsLoadingByUrl.delete(name) ),
 				share()
 			);
 
-			this.iconsLoadingByUrl.set(url, o);
+			this.iconsLoadingByUrl.set(name, o);
 			return o;
 		}
 	}
