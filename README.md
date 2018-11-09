@@ -45,6 +45,11 @@ Basic usage is:
 ```
 *Note that without a height or width set, the SVG may not display!*
 
+If svg was previously loaded via registry with name it can be used like this:
+```html
+<svg-icon name="eye" [svgStyle]="{ 'width.px':90 }"></svg-icon>
+```
+
 More complex styling can be applied to the svg, for example:
 ```html
 <svg-icon src="images/eye.svg" [stretch]="true"

@@ -30,25 +30,34 @@ export class SvgIconRegistryService {
 			return observableOf(this.iconsByUrl.get(name));
 		} else if (this.iconsLoadingByUrl.has(name)) {
 			return this.iconsLoadingByUrl.get(name);
-		} else {
-			const o = <Observable<SVGElement>> this.http.get(url, { responseType: 'text' }).pipe(
-				map(svg => {
-					const div = document.createElement('DIV');
-					div.innerHTML = svg;
-					return <SVGElement>div.querySelector('svg');
-				}),
-				tap (svg => this.iconsByUrl.set(name, svg) ),
-				catchError(err => {
-					console.error(err);
-					return observableThrowError(err);
-				}),
-				finalize(() => this.iconsLoadingByUrl.delete(name) ),
-				share()
-			);
-
-			this.iconsLoadingByUrl.set(name, o);
-			return o;
 		}
+		const o = <Observable<SVGElement>> this.http.get(url, { responseType: 'text' }).pipe(
+			map(svg => {
+				const div = document.createElement('DIV');
+				div.innerHTML = svg;
+				return <SVGElement>div.querySelector('svg');
+			}),
+			tap (svg => this.iconsByUrl.set(name, svg) ),
+			catchError(err => {
+				console.error(err);
+				return observableThrowError(err);
+			}),
+			finalize(() => this.iconsLoadingByUrl.delete(name) ),
+			share()
+		);
+
+		this.iconsLoadingByUrl.set(name, o);
+		return o;
+	}
+
+	/** Get loaded SVG from registry by name. (also works by url because of blended map) */
+	getSvgByName(name: string): Observable<SVGElement> {
+		if (this.iconsByUrl.has(name)) {
+			return observableOf(this.iconsByUrl.get(name));
+		} else if (this.iconsLoadingByUrl.has(name)) {
+			return this.iconsLoadingByUrl.get(name);
+		}
+		return observableThrowError(`No svg with name '${name}' has been loaded`);
 	}
 
 	/** Remove a SVG from the registry by URL (or name). */
