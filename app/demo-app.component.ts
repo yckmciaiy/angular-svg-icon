@@ -86,5 +86,6 @@ export class DemoAppComponent {
 
 	swapImg() {
 		this.onImg = (this.onImg === 1 ? 0 : 1);
+		this.display = true;
 	}
 }
