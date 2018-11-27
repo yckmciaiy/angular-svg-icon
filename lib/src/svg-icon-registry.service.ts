@@ -35,7 +35,7 @@ export class SvgIconRegistryService {
 
 	/** Load a SVG to the registry from a URL. */
 	loadSvg(url:string, name: string = url): Observable<SVGElement> {
-
+    
 		// not sure if there should be a possibility to use name for server usage
 		// so overriding it for now if provided
 		// maybe should separate functionality for url and name use-cases
