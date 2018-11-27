@@ -102,6 +102,25 @@ To unload a SVG from the registry.
 }
 ```
 
+## Usage with Angular Universal
+To support loading the SVGs URLs server-side with Universal, either the full URL 
+of the SVG must be provided or a `SERVER_URL` must be defined in the 
+AppServerModule:
+```typescript
+...
+import { SERVER_URL } from 'angular-svg-icon';
+
+@NgModule({
+  imports: [
+    AppModule,
+    ServerModule,
+    ModuleMapLoaderModule,
+    ServerTransferStateModule,
+  ],
+  bootstrap: [AppComponent],
+  providers: [{provide: SERVER_URL, useValue: 'http://localhost:4000/'}]
+  ...
+```
 ## SVG Preparation
 The SVG should be modified to remove the height and width attributes from the file
 per Sara Soueidan's advice in "[Making SVGs Responsive With
